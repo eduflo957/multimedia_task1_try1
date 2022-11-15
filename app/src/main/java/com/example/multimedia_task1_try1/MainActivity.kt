@@ -2,6 +2,7 @@ package com.example.multimedia_task1_try1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     private var onCreate = 0
@@ -16,6 +17,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         println("onCreate $onCreate")
+
+        var mTextView = TextView (this);
+
+        if (savedInstanceState == null) {
+            mTextView.setText("Welcome to HelloAndroid!");
+        } else {
+            mTextView.setText("Welcome back.");
+        }
+
+        setContentView(mTextView);
     }
 
     override fun onStart() {
