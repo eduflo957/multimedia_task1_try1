@@ -1,8 +1,11 @@
 package com.example.multimedia_task1_try1
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
     private var onCreate = 0
@@ -12,50 +15,73 @@ class MainActivity : AppCompatActivity() {
     private var onRestart = 4
     private var onStop = 5
     private var onDestroy = 6
+    private var onSave = 7
+    private var onRestore = 8
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        println(LocalDateTime.now())
         println("onCreate $onCreate")
-
-        var mTextView = TextView (this);
-
-        if (savedInstanceState == null) {
-            mTextView.setText("Welcome to HelloAndroid!");
-        } else {
-            mTextView.setText("Welcome back.");
-        }
-
-        setContentView(mTextView);
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        println(LocalDateTime.now())
+        println("onSave $onSave")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        println(LocalDateTime.now())
+        println("onRestore $onRestore")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
+        println(LocalDateTime.now())
         println("onStart $onStart")
     }
 
-    override fun onResume () {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onResume() {
         super.onResume()
+        println(LocalDateTime.now())
         println("onResume $onResume")
     }
 
-    override fun onPause () {
+/*    protected void onSaveInstanceState (Bundle outState)*/
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onPause() {
         super.onPause()
+        println(LocalDateTime.now())
         println("onPause $onPause")
     }
 
-    override fun onRestart () {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onRestart() {
         super.onRestart()
+        println(LocalDateTime.now())
         println("onRestart $onRestart")
     }
 
-    override fun onStop () {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onStop() {
         super.onStop()
+        println(LocalDateTime.now())
         println("onStop $onStop")
     }
 
-    override fun onDestroy () {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onDestroy() {
         super.onDestroy()
+        println(LocalDateTime.now())
         println("onDestroy $onDestroy")
     }
 }
