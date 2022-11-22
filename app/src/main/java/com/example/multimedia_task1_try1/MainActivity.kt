@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private var onRestore = 8
 
 
+    //Pongo el localDateTime como marca de agua.
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
