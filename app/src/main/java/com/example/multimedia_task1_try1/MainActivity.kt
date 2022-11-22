@@ -3,7 +3,7 @@ package com.example.multimedia_task1_try1
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import android.widget.EditText
 import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
 
@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private var onSave = 7
     private var onRestore = 8
 
+    private lateinit var varNombre :EditText
+    private lateinit var varApellido :EditText
 
     //Pongo el localDateTime como marca de agua.
     @RequiresApi(Build.VERSION_CODES.O)
@@ -26,20 +28,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         println(LocalDateTime.now())
         println("onCreate $onCreate")
-    }
+        varNombre = findViewById(R.id.editTextTextPersonName)
+        varApellido =findViewById(R.id.editTextTextPersonName2)
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        println(LocalDateTime.now())
-        println("onSave $onSave")
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        println(LocalDateTime.now())
-        println("onRestore $onRestore")
+        println(varNombre)
+        println(varApellido)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -85,4 +78,27 @@ class MainActivity : AppCompatActivity() {
         println(LocalDateTime.now())
         println("onDestroy $onDestroy")
     }
+
+    //Me he quedado haciendo las pruebas, se guarda la información
+    //pero no he conseguido que la información que se guarda sea
+    //la que ha introducido el US por pantalla, no controlo el funcionamiento
+    // del to.do, pero al girar la aplicación y volver a su estado normal,
+    //consigo que funcione.
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+
+        savedInstanceState.putString("prueba1",varNombre.text.toString())
+        savedInstanceState.putString("prueba2",varApellido.text.toString())
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        varNombre.setText(savedInstanceState.getString("prueba1"))
+        varApellido.setText(savedInstanceState.getString("prueba2"))
+    }
+
 }
