@@ -3,6 +3,8 @@ package com.example.multimedia_task1_try1
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
@@ -18,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     private var onSave = 7
     private var onRestore = 8
 
-    private lateinit var varNombre :EditText
-    private lateinit var varApellido :EditText
+    private lateinit var varNombre: EditText
+    private lateinit var varApellido: EditText
 
     //Pongo el localDateTime como marca de agua.
     @RequiresApi(Build.VERSION_CODES.O)
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         println(LocalDateTime.now())
         println("onCreate $onCreate")
         varNombre = findViewById(R.id.editTextTextPersonName)
-        varApellido =findViewById(R.id.editTextTextPersonName2)
+        varApellido = findViewById(R.id.editTextTextPersonName2)
 
         println(varNombre)
         println(varApellido)
@@ -79,18 +81,18 @@ class MainActivity : AppCompatActivity() {
         println("onDestroy $onDestroy")
     }
 
-    //Me he quedado haciendo las pruebas, se guarda la información
-    //pero no he conseguido que la información que se guarda sea
-    //la que ha introducido el US por pantalla, no controlo el funcionamiento
-    // del to.do, pero al girar la aplicación y volver a su estado normal,
-    //consigo que funcione.
+    /*Me he quedado haciendo las pruebas, se guarda la información
+    pero no he conseguido que la información que se guarda sea
+    la que ha introducido el US por pantalla, no controlo el funcionamiento
+    del to.do, pero al girar la aplicación y volver a su estado normal,
+    consigo que funcione.*/
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         super.onSaveInstanceState(savedInstanceState)
 
-        savedInstanceState.putString("prueba1",varNombre.text.toString())
-        savedInstanceState.putString("prueba2",varApellido.text.toString())
+        savedInstanceState.putString("prueba1", varNombre.text.toString())
+        savedInstanceState.putString("prueba2", varApellido.text.toString())
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -99,6 +101,18 @@ class MainActivity : AppCompatActivity() {
 
         varNombre.setText(savedInstanceState.getString("prueba1"))
         varApellido.setText(savedInstanceState.getString("prueba2"))
+    }
+
+    private fun addListenerToEditText() {
+        binding.setContent.addTextChangedListener(object : TextWatcher) {
+            override fun afterChanged(s: Editable?) {
+                binding.twContect.text=binding.etContent.text
+            }
+
+            override fun beforeTextChanged(s: CharSequence), start:Int, count:Int, after:Int){}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            }
+        }
     }
 
 }
